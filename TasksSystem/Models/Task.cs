@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace TasksSystem.Models
 {
     public class Task
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         
         public string Title { get; set; }
@@ -20,7 +22,7 @@ namespace TasksSystem.Models
 
         //public Status status { get; set; }
 
-        public int UserId { get; set; }
+        public string UserName { get; set; }
         
         public int NumberOfDays { get; set; }
 

@@ -7,66 +7,65 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TasksSystem.Data;
 using TasksSystem.Models;
-using Task = TasksSystem.Models.Task;
 
 namespace TasksSystem.Controllers
 {
-    public class TasksController : Controller
+    public class UsersController : Controller
     {
         private readonly TasksSystemContext _context;
 
-        public TasksController(TasksSystemContext context)
+        public UsersController(TasksSystemContext context)
         {
             _context = context;
         }
 
-        // GET: Tasks
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Task.ToListAsync());
+            return View(await _context.User.ToListAsync());
         }
 
-        // GET: Tasks/Details/5
-        public async Task<IActionResult> Details(int? Id)
+        // GET: Users/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            if (Id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var task = await _context.Task
-                .FirstOrDefaultAsync(m => m.Id == Id);
-            if (task == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(task);
+            return View(user);
         }
 
-        // GET: Tasks/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tasks/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Title,CreationDate,DeadlineDate,UserId,NumberOfDays,Text")] Task task)
+        public async Task<IActionResult> Create([Bind("Id,Name")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(task);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(task);
+            return View(user);
         }
 
-        // GET: Tasks/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +73,22 @@ namespace TasksSystem.Controllers
                 return NotFound();
             }
 
-            var task = await _context.Task.FindAsync(id);
-            if (task == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(task);
+            return View(user);
         }
 
-        // POST: Tasks/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("id,Title,CreationDate,DeadlineDate,UserId,NumberOfDays,Text")] Task task)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] User user)
         {
-            if (Id != task.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -98,12 +97,12 @@ namespace TasksSystem.Controllers
             {
                 try
                 {
-                    _context.Update(task);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TaskExists(task.Id))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +113,41 @@ namespace TasksSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(task);
+            return View(user);
         }
 
-        // GET: Tasks/Delete/5
-        public async Task<IActionResult> Delete(int? Id)
+        // GET: Users/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (Id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var task = await _context.Task
-                .FirstOrDefaultAsync(m => m.Id == Id);
-            if (task == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(task);
+            return View(user);
         }
 
-        // POST: Tasks/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int Id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var task = await _context.Task.FindAsync(Id);
-            _context.Task.Remove(task);
+            var user = await _context.User.FindAsync(id);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TaskExists(int Id)
+        private bool UserExists(int id)
         {
-            return _context.Task.Any(e => e.Id == Id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }
