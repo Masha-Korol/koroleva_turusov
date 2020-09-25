@@ -11,7 +11,7 @@ namespace TasksSystem.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
+
         public string Title { get; set; }
 
         [DataType(DataType.Date)]
@@ -23,9 +23,23 @@ namespace TasksSystem.Models
         //public Status status { get; set; }
 
         public string UserName { get; set; }
-        
+
         public int NumberOfDays { get; set; }
 
         public string Text { get; set; }
+
+        public User User { get; set; }
+
+        public Task(string Title, DateTime CreationDate, DateTime DeadlineDate, string UserName, int NumberOfDays, string Text)
+        {
+            this.Title = Title;
+            this.CreationDate = CreationDate;
+            this.DeadlineDate = DeadlineDate;
+            this.UserName = UserName;
+            this.NumberOfDays = NumberOfDays;
+            this.Text = Text;
+        }
+
+
     }
 }

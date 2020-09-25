@@ -47,6 +47,7 @@ namespace TasksSystem.Controllers
         // GET: Tasks/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -55,15 +56,32 @@ namespace TasksSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Title,CreationDate,DeadlineDate,UserId,NumberOfDays,Text")] Task task)
-        {
+        //public async Task<IActionResult> Create([Bind("id,Title,CreationDate,DeadlineDate,UserId,NumberOfDays,Text")] Task task, int Id)
+        public async Task<IActionResult> Create(string Title,
+                                                DateTime CreationDate,
+                                                DateTime DeadlineDate,
+                                                string UserName,
+                                                int NumberOfDays,
+                                                string Text, int id)
+        {           
             if (ModelState.IsValid)
             {
+                User user = _context.User.Find(id);
+                Task task = new Task(Title, CreationDate, DeadlineDate, UserName, NumberOfDays, Text);
+                task.User = user;
                 _context.Add(task);
+                user.Tasks.AddRange(new List<Task>() { task });
+                //task.User.Tasks.Add(task);
+                //_context.Entry(User).State = EntityState.Modified;
+                //user.Tasks.Add(task);
+                //user.addTask(task);
+                _context.Update<User>(user);
+                //_context.UpdateRange(user.Tasks);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(task);
+            return View();
+            //return View(task);
         }
 
         // GET: Tasks/Edit/5

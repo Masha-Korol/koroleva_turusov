@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TasksSystem.Data;
 using TasksSystem.Models;
+using Task = TasksSystem.Models.Task;
 
 namespace TasksSystem.Controllers
 {
@@ -40,6 +42,18 @@ namespace TasksSystem.Controllers
                 return NotFound();
             }
 
+            var tasks = _context.Task.ToList();
+            List<Task> array = new List<Task>();
+
+            tasks.ForEach(delegate (Task task)
+            {
+                if (task.User.Equals(user))
+                {
+                    array.Add(task);
+                }
+            });
+
+            ViewBag.Tasks = array;
             return View(user);
         }
 
@@ -54,15 +68,18 @@ namespace TasksSystem.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] User user)
+        //public async Task<IActionResult> Create([Bind("Id,Name")] User user)
+        public async Task<IActionResult> Create(string Name, int id)
         {
             if (ModelState.IsValid)
             {
+                User user = new User(Name, id);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            //return View(user);
+            return View();
         }
 
         // GET: Users/Edit/5

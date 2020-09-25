@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace TasksSystem.Data
         {
         }
 
-        public DbSet<Task> Task { get; set; }
+        public DbSet<Models.Task> Task { get; set; }
         public DbSet<User> User { get; set; }
     }
 }
