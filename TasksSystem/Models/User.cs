@@ -17,6 +17,8 @@ namespace TasksSystem.Models
 
         public List<Task> Tasks { get; set; }
 
+        public List<ProjectUsers> Projects { get; set; }
+
         public void AddTask(Task task)
         {
             //this.Tasks.AddLast(task);

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\TasksSystem\\TasksSystem\\TasksSystem.csproj": {}
+    "C:\\Users\\user\\Pepos\\GitLab\\koroleva_turusov-vetka\\koroleva_turusov-vetka\\TasksSystem\\TasksSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\TasksSystem\\TasksSystem\\TasksSystem.csproj": {
+    "C:\\Users\\user\\Pepos\\GitLab\\koroleva_turusov-vetka\\koroleva_turusov-vetka\\TasksSystem\\TasksSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\TasksSystem\\TasksSystem\\TasksSystem.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Pepos\\GitLab\\koroleva_turusov-vetka\\koroleva_turusov-vetka\\TasksSystem\\TasksSystem.csproj",
         "projectName": "TasksSystem",
-        "projectPath": "C:\\Users\\user\\source\\repos\\TasksSystem\\TasksSystem\\TasksSystem.csproj",
+        "projectPath": "C:\\Users\\user\\Pepos\\GitLab\\koroleva_turusov-vetka\\koroleva_turusov-vetka\\TasksSystem\\TasksSystem.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\TasksSystem\\TasksSystem\\obj\\",
+        "outputPath": "C:\\Users\\user\\Pepos\\GitLab\\koroleva_turusov-vetka\\koroleva_turusov-vetka\\TasksSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

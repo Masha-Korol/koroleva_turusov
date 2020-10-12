@@ -30,6 +30,8 @@ namespace TasksSystem.Models
 
         public User User { get; set; }
 
+        public Project Project { get; set; }
+
         public Task(string Title, DateTime CreationDate, DateTime DeadlineDate, string UserName, int NumberOfDays, string Text)
         {
             this.Title = Title;
