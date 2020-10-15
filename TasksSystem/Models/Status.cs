@@ -7,6 +7,6 @@ namespace TasksSystem.Models
 {
     public class Status
     {
-        enum Statuses { Open, Done, Closed};
+        enum Statuses { Open, Done, Closed };
     }
 }

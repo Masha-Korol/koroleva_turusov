@@ -9,27 +9,14 @@ namespace TasksSystem.Models
 {
     public class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public List<Task> Tasks { get; set; }
+        //__________________________________________
 
-        public List<ProjectUsers> Projects { get; set; }
+        public List<Project> Projects { get; set; }
 
-        public void AddTask(Task task)
-        {
-            //this.Tasks.AddLast(task);
-            this.Tasks.AddRange(new List<Task>() { task });
-        }
-
-        public User(string Name, int id)
-        {
-            this.Name = Name;
-            this.Id = id;
-            this.Tasks = new List<Task>();
-        }
+        public List<Comment> Comments { get; set; }
     }
 }
