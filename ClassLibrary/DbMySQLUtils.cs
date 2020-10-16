@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 
 namespace ClassLibrary
 {
     class DbMySQLUtils
     {
-        public static MySqlConnection
+  /*      public static MySqlConnection
                  GetDBConnection(string host, int port, string database, string username, string password)
         {
             // Connection String.
@@ -19,6 +19,6 @@ namespace ClassLibrary
             MySqlConnection conn = new MySqlConnection(connString);
 
             return conn;
-        }
+        }*/
     }
 }

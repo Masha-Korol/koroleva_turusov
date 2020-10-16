@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LinqToDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
+using ClassLibrary;
+using Microsoft.EntityFrameworkCore;
+using ClassLibrary.Data;
 
 namespace TasksSystem
 {
@@ -29,9 +31,9 @@ namespace TasksSystem
         /*    services.AddDbContextPool<DataContext>(
       options => options.UseMySql(Configuration.GetConnectionString("tasks_system")
    ));*/
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:tasks_system"]));
-            //services.AddDbContext<TasksSystemContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("TasksSystemContext")));
+            //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:tasks_system"]));
+            services.AddDbContext<ClassLibraryContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ClassLibraryContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

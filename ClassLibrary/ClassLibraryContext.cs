@@ -1,28 +1,32 @@
 ﻿//using System.Data.Entity;
 using TasksSystem.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 
 namespace ClassLibrary.Data
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
-    class ClassLibraryContext : DbContext
+ 
+    public class ClassLibraryContext : DbContext
     {
-        public ClassLibraryContext() : base("conn") { }
+        public ClassLibraryContext() : base() { }
+
+        public ClassLibraryContext(DbContextOptions<ClassLibraryContext> dbContextOptions): base(dbContextOptions)
+        {
+
+        }
 
         /*public ClassLibraryContext(DbContextOptions<ClassLibraryContext> options)
         : base(options) { }*/
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserDb>()
                 .HasKey(x => x.Id);
-            modelBuilder.Entity<Project>()
+            modelBuilder.Entity<ProjectDb>()
                 .HasKey(x => x.Id);
 
             modelBuilder.Entity<ProjectUsers>()
@@ -35,11 +39,11 @@ namespace ClassLibrary.Data
                 .HasOne(x => x.Project)
                 .WithMany(m => m.Users)
                 .HasForeignKey(x => x.ProjectId);
-        }*/
+        }
 
-        public System.Data.Entity.DbSet<Task> Task { get; set; }
-        public System.Data.Entity.DbSet<User> User { get; set; }
-        public System.Data.Entity.DbSet<Project> Project { get; set; }
-        public System.Data.Entity.DbSet<Comment> Comments { get; set; }
+        public DbSet<TaskDb> Task { get; set; }
+        public DbSet<UserDb> User { get; set; }
+        public DbSet<ProjectDb> Project { get; set; }
+        public DbSet<CommentDb> Comments { get; set; }
     }
 }

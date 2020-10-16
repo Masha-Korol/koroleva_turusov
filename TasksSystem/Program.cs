@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
+//using MySql.Data;
 using ClassLibrary;
 using System.IO;
 
@@ -18,17 +19,7 @@ namespace TasksSystem
         {
             CreateHostBuilder(args).Build().Run();
 
-            MySqlConnection conn = DbUtils.GetDBConnection();
-            try{
-                conn.Open();
-                Console.WriteLine("Connection successful!");
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Error: " + e.Message);
-            }
-            Console.Read();
-
+            
             /*Console.WriteLine("Getting Connection ...");
             MySqlConnection conn = DbUtils.GetDBConnection();
 
