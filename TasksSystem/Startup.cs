@@ -8,10 +8,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-//using MySql.Data.MySqlClient;
 using ClassLibrary;
 using Microsoft.EntityFrameworkCore;
 using ClassLibrary.Data;
+using TasksSystem.Repos;
+using TasksSystem.Services;
+using AutoMapper;
+using TasksSystem.Models;
 
 namespace TasksSystem
 {
@@ -27,13 +30,27 @@ namespace TasksSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-        /*    services.AddDbContextPool<DataContext>(
-      options => options.UseMySql(Configuration.GetConnectionString("tasks_system")
-   ));*/
-            //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:tasks_system"]));
             services.AddDbContext<ClassLibraryContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ClassLibraryContext")));
+            services.AddScoped<ProjectRepository>();
+            services.AddScoped<ProjectService>();
+            services.AddScoped<UserRepository>();
+            services.AddScoped<UserService>();
+            services.AddScoped<ProjectUsersService>();
+            services.AddScoped<ProjectUsersRepository>();
+            services.AddScoped<TaskService>();
+            services.AddScoped<TaskRepository>();
+            services.AddScoped<CommentService>();
+            services.AddScoped<CommentRepository>();
+            services.AddControllersWithViews();
+
+            var mappingConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +70,7 @@ namespace TasksSystem
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

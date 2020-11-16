@@ -17,7 +17,20 @@ namespace TasksSystem.Models
 
         public DateTime DeadlineDate { get; set; }
 
-        //public Status status { get; set; }
+        [Required]
+        public virtual int StatusId
+        {
+            get
+            {
+                return (int)this.Status;
+            }
+            set
+            {
+                Status = (Statuses)value;
+            }
+        }
+        [EnumDataType(typeof(Statuses))]
+        public Statuses Status { get; set; }
 
         public string Text { get; set; }
 
@@ -26,5 +39,13 @@ namespace TasksSystem.Models
         public Project Project { get; set; }
 
         public List<Comment> Comments {get; set;}
+        public User User { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Task task &&
+                   Id == task.Id &&
+                   Title == task.Title;
+        }
     }
 }

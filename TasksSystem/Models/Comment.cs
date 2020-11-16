@@ -12,8 +12,14 @@ namespace TasksSystem.Models
 
         public String text { get; set; }
 
+        //_________________________________
         public User User { get; set; }
 
         public Task Task { get; set; }
+
+        public Comment(string text)
+        {
+            this.text = text;
+        }
     }
 }

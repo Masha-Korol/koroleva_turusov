@@ -15,8 +15,23 @@ namespace TasksSystem.Models
 
         //__________________________________________
 
-        public List<Project> Projects { get; set; }
+        public List<ProjectUsers> Projects { get; set; }
 
         public List<Comment> Comments { get; set; }
+        public List<Task> Tasks { get; set; }
+
+
+
+        public User()
+        {
+            Projects = new List<ProjectUsers>();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is User user &&
+                   Id == user.Id &&
+                   Name == user.Name;
+        }
     }
 }

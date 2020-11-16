@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,7 +22,20 @@ namespace TasksSystem.Models
         [DataType(DataType.Date)]
         public DateTime DeadlineDate { get; set; }
 
-        //public Status status { get; set; }
+        [Required]
+        public virtual int StatusId
+        {
+            get
+            {
+                return (int)this.Status;
+            }
+            set
+            {
+                Status = (StatusesDb)value;
+            }
+        }
+        [EnumDataType(typeof(StatusesDb))]
+        public StatusesDb Status { get; set; }
 
         public string Text { get; set; }
 
@@ -30,5 +44,7 @@ namespace TasksSystem.Models
         public ProjectDb Project { get; set; }
 
         public List<CommentDb> Comments {get; set;}
+
+        public UserDb User { get; set; }
     }
 }

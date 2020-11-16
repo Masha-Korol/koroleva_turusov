@@ -14,14 +14,6 @@ namespace ClassLibrary.Data
 
         }
 
-        /*public ClassLibraryContext(DbContextOptions<ClassLibraryContext> options)
-        : base(options) { }*/
-
-        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }*/
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserDb>()
@@ -29,13 +21,13 @@ namespace ClassLibrary.Data
             modelBuilder.Entity<ProjectDb>()
                 .HasKey(x => x.Id);
 
-            modelBuilder.Entity<ProjectUsers>()
+            modelBuilder.Entity<ProjectUsersDb>()
                 .HasKey(x => new { x.ProjectId, x.UserId });
-            modelBuilder.Entity<ProjectUsers>()
+            modelBuilder.Entity<ProjectUsersDb>()
                 .HasOne(x => x.User)
                 .WithMany(m => m.Projects)
                 .HasForeignKey(x => x.UserId);
-            modelBuilder.Entity<ProjectUsers>()
+            modelBuilder.Entity<ProjectUsersDb>()
                 .HasOne(x => x.Project)
                 .WithMany(m => m.Users)
                 .HasForeignKey(x => x.ProjectId);
@@ -45,5 +37,7 @@ namespace ClassLibrary.Data
         public DbSet<UserDb> User { get; set; }
         public DbSet<ProjectDb> Project { get; set; }
         public DbSet<CommentDb> Comments { get; set; }
+
+        public DbSet<ProjectUsersDb> ProjectUsers { get; set; }
     }
 }

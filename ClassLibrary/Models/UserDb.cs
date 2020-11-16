@@ -17,8 +17,9 @@ namespace TasksSystem.Models
 
         //__________________________________________
 
-        public List<ProjectUsers> Projects { get; set; }
+        public List<ProjectUsersDb> Projects { get; set; }
 
         public List<CommentDb> Comments { get; set; }
+        public List<TaskDb> Tasks { get; set; }
     }
 }

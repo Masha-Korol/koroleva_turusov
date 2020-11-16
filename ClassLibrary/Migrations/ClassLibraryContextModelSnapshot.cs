@@ -51,6 +51,9 @@ namespace ClassLibrary.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Project");
@@ -93,9 +96,14 @@ namespace ClassLibrary.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Task");
                 });
@@ -146,6 +154,10 @@ namespace ClassLibrary.Migrations
                     b.HasOne("TasksSystem.Models.ProjectDb", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId");
+
+                    b.HasOne("TasksSystem.Models.UserDb", "User")
+                        .WithMany("Tasks")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
